@@ -18,8 +18,18 @@ public class ListMaker {
     public void createList(){
         System.out.println("Enter the name of the list: ");
         this.name = input.nextLine();
-        lists.add(name);
-        ArrayList<String> name = new ArrayList<>();
+        boolean alreadyExists=false;
+        if (!lists.isEmpty()){
+            Object[] listsArray = lists.toArray();
+            for (Object element : listsArray) {
+                if (String.valueOf(element).equalsIgnoreCase(name)) alreadyExists = true;
+            }
+        }
+        if (alreadyExists) System.out.println("List already exists.");
+        else {
+            lists.add(this.name);
+            ArrayList<String> name = new ArrayList<>();
+        }
     }
 
     public String getItems(ArrayList<String> list){
