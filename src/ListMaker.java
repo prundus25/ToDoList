@@ -20,9 +20,9 @@ public class ListMaker {
         this.name = input.nextLine();
         boolean alreadyExists=false;
         if (!lists.isEmpty()){
-            Object[] listsArray = lists.toArray();
-            for (Object element : listsArray) {
-                if (String.valueOf(element).equalsIgnoreCase(name)) alreadyExists = true;
+            //Object[] listsArray = lists.toArray();
+            for (String element : lists) {
+                if (element.equalsIgnoreCase(name)) alreadyExists = true;
             }
         }
         if (alreadyExists) System.out.println("List already exists.");
