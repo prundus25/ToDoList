@@ -31,7 +31,6 @@ public class ListMaker {
             if (alreadyExists) System.out.println("List already exists.");
         }
         
-        
         listNames.add(name);
         ArrayList<String> newList = new ArrayList<>();
         lists.add(newList);
@@ -47,8 +46,8 @@ public class ListMaker {
                 System.out.println(ENTER);
                 listNr = input.nextInt();
             }
-        listNames.remove(listNr-1);
-        lists.remove(listNr-1);
+            listNames.remove(listNr-1);
+            lists.remove(listNr-1);
         }
     }
 
@@ -118,7 +117,6 @@ public class ListMaker {
             itemNr--;
             lists.get(listNr).remove(itemNr);
             lists.get(listNr).add(itemNr, newItemName);
-
         }
     }
 

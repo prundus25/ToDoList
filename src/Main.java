@@ -29,7 +29,7 @@ public class Main {
                         System.out.println(maker.getItems(listNr-1));
                         System.out.println(("\nOptions:\n0 -> Return to main menu.\n1. Add item\n2. Remove item\n3. Rename item"));
                         option=input.nextInt();
-
+                        input.skip("\n");
                         if (option == 0)break;
                         System.out.println(separator);
 
