@@ -1,17 +1,17 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 public class ListMaker {
     Scanner input = new Scanner(System.in);
-    static ArrayList<String> lists = new ArrayList<>();
+    ArrayList<ArrayList<String>> lists = new ArrayList<>();
     String name;
+    ArrayList<String> listNames = new ArrayList<>();
+    
+    static final String ENTER = "Enter the list's number: ";
+    int listNr;
 
-    public ListMaker() {
-        
-    }
-
-    public static String getLists(){
-        String listString = buildString(lists, false);
-
+    public String getLists(){
+        String listString = buildString(listNames, false);
         return (lists.isEmpty()) ? "You currently have no lists." : "You currently have " + lists.size() + " list(s):\n"+listString;
     }
 
@@ -19,38 +19,106 @@ public class ListMaker {
         System.out.println("Enter the name of the list: ");
         this.name = input.nextLine();
         boolean alreadyExists=false;
-        if (!lists.isEmpty()){
-            //Object[] listsArray = lists.toArray();
-            for (String element : lists) {
-                if (element.equalsIgnoreCase(name)) alreadyExists = true;
-            }
+
+        Iterator<String> namesIterator = listNames.iterator();
+        while(namesIterator.hasNext()){
+            String element = namesIterator.next();
+            if(element.equalsIgnoreCase(name)) alreadyExists = true;
         }
+
         if (alreadyExists) System.out.println("List already exists.");
         else {
-            lists.add(this.name);
-            ArrayList<String> name = new ArrayList<>();
+            listNames.add(name);
+            ArrayList<String> newList = new ArrayList<>();
+            lists.add(newList);
         }
     }
 
-    public String getItems(ArrayList<String> list){
-        /* 
-        Object[] itemsArray = list.toArray();
-        StringBuilder bld = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            bld.append(String.valueOf(i+1));
-            bld.append(". ");
-            bld.append(itemsArray[i]);
-            bld.append("\n");
+    public void deleteList(){
+        if(listNames.isEmpty()){
+            System.out.println("No lists to delete.");
+        }else{
+            int listNr = listNames.size()+1;
+            while(!isListNrCorrect(listNr)){
+                System.out.println(ENTER);
+                listNr = input.nextInt();
+            }
+        listNames.remove(listNr-1);
+        lists.remove(listNr-1);
         }
-        String itemString = bld.toString();
-        */
-        System.out.println(name);
-        String itemString = buildString(list, true);
-        return (list.isEmpty()) ? "The list is empty." : itemString;
+    }
+
+    public void renameList(){
+        int listNr = listNames.size()+1;
+        while(!isListNrCorrect(listNr)){
+            System.out.println(ENTER);
+            listNr = input.nextInt();
+        }
+        input.nextLine();
+        System.out.println("Enter new list name: ");
+        String newName = input.nextLine();
+        listNr-=1;
+        listNames.remove(listNr);
+        listNames.add(listNr, newName);
+    }
+
+    public String getItems(int listNr){
+        String itemList = buildString(lists.get(listNr), true);
+        return (lists.get(listNr).isEmpty()) ? "The list is empty." : listNames.get(listNr)+":\n"+itemList;
+    }
+
+    public void addItem(int listNr){
+        System.out.println("Enter name of item: ");
+        String item = input.nextLine();
+        
+        int itemPos = lists.get(listNr).size()+2;
+        while(itemPos<0 || itemPos > lists.get(listNr).size()+1){
+            System.out.println("Enter position (number) for the new item. Enter 0 for default (add to the end).");
+            itemPos = input.nextInt();
+            input.nextLine();
+        }
+        if (itemPos == 0){
+            lists.get(listNr).add(item);
+        }else {
+            itemPos-=1;
+            lists.get(listNr).add(itemPos, item);
+        }
+    }
+
+    public void deleteItem(int listNr){
+        if(lists.get(listNr).isEmpty()){
+            System.out.println("No lists to delete.");
+        }else{
+            int itemNr = lists.get(listNr).size()+1;
+            while(itemNr<1 || itemNr > lists.get(listNr).size()){
+                System.out.println("Enter item number: ");
+                itemNr = input.nextInt();
+            }
+            itemNr--;
+            lists.get(listNr).remove(itemNr);
+        }
+    }
+
+    public void renameItem(int listNr){
+        if(lists.get(listNr).isEmpty()){
+            System.out.println("No items to rename.");
+        }else{
+            int itemNr = lists.get(listNr).size()+1;
+            while(itemNr<1 || itemNr > lists.get(listNr).size()){
+                System.out.println("Enter item number: ");
+                itemNr = input.nextInt();
+            }
+            input.nextLine();
+            System.out.println("Enter new item name: ");
+            String newItemName = input.nextLine();
+            itemNr--;
+            lists.get(listNr).remove(itemNr);
+            lists.get(listNr).add(itemNr, newItemName);
+
+        }
     }
 
     private static String buildString(ArrayList<String> list, boolean isItemList){
-        //Object[] array = list.toArray();
         StringBuilder bld = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             bld.append(i+1).append(". ").append(list.get(i));
@@ -58,6 +126,10 @@ public class ListMaker {
             else if (i != list.size()-1)bld.append(" ; ");
         }
         return bld.toString();
+    }
+
+    boolean isListNrCorrect(int listNr){
+        return (listNr >= 1 && listNr <= listNames.size());
     }
     
 }
