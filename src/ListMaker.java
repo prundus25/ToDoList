@@ -85,10 +85,14 @@ public class ListMaker {
             while(itemPos<0 || itemPos > lists.get(listNr).size()+1){
             System.out.println("Enter position (number) for the new item. Enter 0 for default (add to the end).\n"+separator2);
             itemPos = input.nextInt();
-            input.nextLine();
+            input.skip("\n");
         }
-            itemPos-=1;
-            lists.get(listNr).add(itemPos, item);
+            if(itemPos==0)lists.get(listNr).add(item);
+            else{
+                itemPos-=1;
+                lists.get(listNr).add(itemPos, item);
+            }
+            
         }
     }
 
