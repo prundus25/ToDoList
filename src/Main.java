@@ -42,6 +42,7 @@ public class Main {
                             case 3 -> maker.renameItem(listNr-1);
                             default -> System.out.println("Wrong option number.");
                         }
+                        input.skip("\n");
                         System.out.println(separator+"\n"+separator+"\n\n\n");
                     }
                 }
@@ -50,6 +51,7 @@ public class Main {
 
                 default -> System.out.println("Wrong option number.");
             }
+            input.skip("\n");
             System.out.println(separator+"\n"+separator+"\n\n\n");
         }
     }
