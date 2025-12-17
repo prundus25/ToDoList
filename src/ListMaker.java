@@ -34,7 +34,6 @@ public class ListMaker {
         listNames.add(name);
         ArrayList<String> newList = new ArrayList<>();
         lists.add(newList);
-        
     }
 
     public void deleteList(){
@@ -74,15 +73,16 @@ public class ListMaker {
         System.out.println("Enter name of item: ");
         String item = input.nextLine();
         
-        int itemPos = lists.get(listNr).size()+2;
-        while(itemPos<0 || itemPos > lists.get(listNr).size()+1){
+        int itemPos=-1;
+        
+        if (lists.get(listNr).isEmpty()){
+            lists.get(listNr).add(item);
+        }else {
+            while(itemPos<0 || itemPos > lists.get(listNr).size()+1){
             System.out.println("Enter position (number) for the new item. Enter 0 for default (add to the end).");
             itemPos = input.nextInt();
             input.nextLine();
         }
-        if (itemPos == 0){
-            lists.get(listNr).add(item);
-        }else {
             itemPos-=1;
             lists.get(listNr).add(itemPos, item);
         }
@@ -96,6 +96,7 @@ public class ListMaker {
             while(itemNr<1 || itemNr > lists.get(listNr).size()){
                 System.out.println("Enter item number: ");
                 itemNr = input.nextInt();
+                input.skip("\n");
             }
             itemNr--;
             lists.get(listNr).remove(itemNr);
