@@ -16,22 +16,26 @@ public class ListMaker {
     }
 
     public void createList(){
-        System.out.println("Enter the name of the list: ");
-        this.name = input.nextLine();
-        boolean alreadyExists=false;
+        boolean alreadyExists=true;
+        while(alreadyExists){
+            System.out.println("Enter the name of the list: ");
+            this.name = input.nextLine();
+            alreadyExists=false;
 
-        Iterator<String> namesIterator = listNames.iterator();
-        while(namesIterator.hasNext()){
-            String element = namesIterator.next();
-            if(element.equalsIgnoreCase(name)) alreadyExists = true;
-        }
+            Iterator<String> namesIterator = listNames.iterator();
+            while(namesIterator.hasNext()){
+                String element = namesIterator.next();
+                if(element.equalsIgnoreCase(name)) alreadyExists = true;
+            }
 
-        if (alreadyExists) System.out.println("List already exists.");
-        else {
-            listNames.add(name);
-            ArrayList<String> newList = new ArrayList<>();
-            lists.add(newList);
+            if (alreadyExists) System.out.println("List already exists.");
         }
+        
+        
+        listNames.add(name);
+        ArrayList<String> newList = new ArrayList<>();
+        lists.add(newList);
+        
     }
 
     public void deleteList(){
