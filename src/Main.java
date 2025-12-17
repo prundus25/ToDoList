@@ -17,7 +17,7 @@ public class Main {
 
             switch(option){
                 case 1 -> maker.createList();
-                case 2 -> {// menu with: add item, remove item, rename item
+                case 2 -> {
                     int listNr = maker.listNames.size()+1;
                     while(!maker.isListNrCorrect(listNr)){
                         System.out.println(ListMaker.ENTER);
@@ -39,8 +39,8 @@ public class Main {
                             case 3 -> maker.renameItem(listNr-1);
                             default -> System.out.println("Wrong option number.");
                         }
-                    } 
-                } 
+                    }
+                }
                 case 3 -> maker.renameList();
                 case 4 -> maker.deleteList();
 

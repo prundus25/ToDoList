@@ -11,7 +11,7 @@ public class ListMaker {
     int listNr;
 
     public String getLists(){
-        String listString = buildString(listNames, false);
+        String listString = buildString(listNames);
         return (lists.isEmpty()) ? "You currently have no lists." : "You currently have " + lists.size() + " list(s):\n"+listString;
     }
 
@@ -65,7 +65,7 @@ public class ListMaker {
     }
 
     public String getItems(int listNr){
-        String itemList = buildString(lists.get(listNr), true);
+        String itemList = buildString(lists.get(listNr));
         return (lists.get(listNr).isEmpty()) ? "The list is empty." : listNames.get(listNr)+":\n"+itemList;
     }
 
@@ -121,18 +121,16 @@ public class ListMaker {
         }
     }
 
-    private static String buildString(ArrayList<String> list, boolean isItemList){
+    private static String buildString(ArrayList<String> list){
         StringBuilder bld = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             bld.append(i+1).append(". ").append(list.get(i));
-            if(isItemList) bld.append("\n");
-            else if (i != list.size()-1)bld.append(" ; ");
+            bld.append("\n");
         }
         return bld.toString();
     }
 
     boolean isListNrCorrect(int listNr){
         return (listNr >= 1 && listNr <= listNames.size());
-    }
-    
+    } 
 }
