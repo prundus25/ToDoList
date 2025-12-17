@@ -6,8 +6,8 @@ public class ListMaker {
     ArrayList<ArrayList<String>> lists = new ArrayList<>();
     String name;
     ArrayList<String> listNames = new ArrayList<>();
-    
-    static final String ENTER = "Enter the list's number: ";
+    static final String separator2 = "*******************************";
+    static final String ENTER = "Enter the list (number) to ";
     int listNr;
 
     public String getLists(){
@@ -18,7 +18,7 @@ public class ListMaker {
     public void createList(){
         boolean alreadyExists=true;
         while(alreadyExists){
-            System.out.println("Enter the name of the list: ");
+            System.out.println("Enter the name of the list: \n"+separator2);
             this.name = input.nextLine();
             alreadyExists=false;
 
@@ -42,7 +42,7 @@ public class ListMaker {
         }else{
             int listNr = listNames.size()+1;
             while(!isListNrCorrect(listNr)){
-                System.out.println(ENTER);
+                System.out.println(ENTER+"delete: \n"+separator2);
                 listNr = input.nextInt();
             }
             listNames.remove(listNr-1);
@@ -51,26 +51,30 @@ public class ListMaker {
     }
 
     public void renameList(){
-        int listNr = listNames.size()+1;
-        while(!isListNrCorrect(listNr)){
-            System.out.println(ENTER);
-            listNr = input.nextInt();
+        if(listNames.isEmpty()){
+            System.out.println("No lists to rename.");
+        }else{
+            int listNr = listNames.size()+1;
+            while(!isListNrCorrect(listNr)){
+                System.out.println(ENTER+"rename: \n"+separator2);
+                listNr = input.nextInt();
+            }
+            input.nextLine();
+            System.out.println("Enter new list name: \n"+separator2);
+            String newName = input.nextLine();
+            listNr-=1;
+            listNames.remove(listNr);
+            listNames.add(listNr, newName);
         }
-        input.nextLine();
-        System.out.println("Enter new list name: ");
-        String newName = input.nextLine();
-        listNr-=1;
-        listNames.remove(listNr);
-        listNames.add(listNr, newName);
     }
 
     public String getItems(int listNr){
         String itemList = buildString(lists.get(listNr));
-        return (lists.get(listNr).isEmpty()) ? "The list is empty." : listNames.get(listNr)+":\n"+itemList;
+        return (lists.get(listNr).isEmpty()) ? "The list " + listNames.get(listNr) + " is empty." : "Items in "+ listNames.get(listNr)+":\n"+itemList;
     }
 
     public void addItem(int listNr){
-        System.out.println("Enter name of item: ");
+        System.out.println("Enter name of item: \n"+separator2);
         String item = input.nextLine();
         
         int itemPos=-1;
@@ -79,7 +83,7 @@ public class ListMaker {
             lists.get(listNr).add(item);
         }else {
             while(itemPos<0 || itemPos > lists.get(listNr).size()+1){
-            System.out.println("Enter position (number) for the new item. Enter 0 for default (add to the end).");
+            System.out.println("Enter position (number) for the new item. Enter 0 for default (add to the end).\n"+separator2);
             itemPos = input.nextInt();
             input.nextLine();
         }
@@ -90,11 +94,11 @@ public class ListMaker {
 
     public void deleteItem(int listNr){
         if(lists.get(listNr).isEmpty()){
-            System.out.println("No lists to delete.");
+            System.out.println("No items to remove.");
         }else{
             int itemNr = lists.get(listNr).size()+1;
             while(itemNr<1 || itemNr > lists.get(listNr).size()){
-                System.out.println("Enter item number: ");
+                System.out.println("Enter item (number) to remove: \n"+separator2);
                 itemNr = input.nextInt();
                 input.skip("\n");
             }
@@ -109,7 +113,7 @@ public class ListMaker {
         }else{
             int itemNr = lists.get(listNr).size()+1;
             while(itemNr<1 || itemNr > lists.get(listNr).size()){
-                System.out.println("Enter item number: ");
+                System.out.println("Enter item (number) to rename: \n"+separator2);
                 itemNr = input.nextInt();
             }
             input.nextLine();
