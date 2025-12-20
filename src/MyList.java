@@ -4,8 +4,6 @@ public class MyList {
     private String name;
     ArrayList<String> items = new ArrayList<>();
 
-    //name: rename
-    //items: add , rename, delete
     public MyList(String name) {
         this.name=name;
     }

@@ -1,4 +1,3 @@
-
 //create list object, rename, delete
 //import java.util.List;
 
@@ -32,17 +31,21 @@ public class ListManager {
 
    public String getLists(){
       int n = 1;
-      String stringOfLists="Your lists are:\n***************\n";
-
-      for(MyList list : lists){
-         stringOfLists += (n++) + ". " + list + "\n";
+      String stringOfLists;
+      if(lists.isEmpty()){
+         stringOfLists="You currently have no lists.";
+      }else{
+         stringOfLists="Your lists are:\n***************\n";
+         for(MyList list : lists){
+            stringOfLists += (n++) + ". " + list + "\n";
+         }
       }
       return stringOfLists;
    }
 
    public String getList(int index){
       String listName = lists.get(index).toString();
-      return "Items from list \"" + listName + "\":\n" + lists.get(index).itemString();
+      return (lists.get(index).items.isEmpty()) ? "The list is empty." : "Items from list \"" + listName + "\":\n" + lists.get(index).itemString();
    }
 
    public boolean isNameValid(String name){
@@ -51,5 +54,9 @@ public class ListManager {
 
    public void renameList(int index, String newName){
       lists.get(index).renameList(newName);
+   }
+
+   public void removeList(int index){
+      lists.remove(index);
    }
 }
