@@ -12,11 +12,12 @@ public class ListManager {
    }
 
    public String createList(String name, int index){
-      if(isNameValid(name)){lists.add(index, new MyList(name)); return "List created.";}
+      if(isNameValid(name)){lists.add(index, new MyList(name)); return "List \"" + name + "\" created.";}
       else return "List already exists";
    }
 
-   public void moveList(int index , int destinationIndex){
+   public String moveList(int index , int destinationIndex){
+      String listName = lists.get(index).toString();
       MyList listToMove = lists.get(index);
       final int OFFSET = 1;
 
@@ -26,7 +27,8 @@ public class ListManager {
       }else {
          lists.add(destinationIndex, listToMove);
          lists.remove(index + OFFSET);
-      }  
+      }
+      return "Moved list \"" + listName + "\" to position "+ destinationIndex + ".";
    }
 
    public String getLists(){
@@ -52,11 +54,15 @@ public class ListManager {
       return !lists.toString().contains(name);
    }
 
-   public void renameList(int index, String newName){
+   public String renameList(int index, String newName){
+      String listName = lists.get(index).toString();
       lists.get(index).renameList(newName);
+      return "Renamed list \"" + listName + "\" to \"" + newName + "\".";
    }
 
-   public void removeList(int index){
+   public String removeList(int index){
+      String listName = lists.get(index).toString();
       lists.remove(index);
+      return "Removed list \"" + listName + "\".";
    }
 }

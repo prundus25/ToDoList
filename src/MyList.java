@@ -17,20 +17,23 @@ public class MyList {
         return this.name;
     }
     
-    public void addItem(String itemName){
+    public String addItem(String itemName){
         this.items.add(itemName);
+        return "Added item \"" + itemName + "\".";
     }
 
     public void addItem(String itemName, int index){
         this.items.add(index, itemName);
     }
 
-    public void renameItem(int index, String newName){
+    public String renameItem(int index, String newName){
+        String oldName = this.items.get(index);
         this.items.remove(index);
         this.items.add(index, newName);
+        return "Renamed item \"" + oldName + "\" to \"" + newName + "\".";
     }
 
-    public void moveItem(int index , int destinationIndex){
+    public String moveItem(int index , int destinationIndex){
         String itemToMove = this.items.get(index);
         final int OFFSET = 1;
 
@@ -41,10 +44,13 @@ public class MyList {
             this.items.add(destinationIndex, itemToMove);
             this.items.remove(index + OFFSET);
         }
+        return "Moved item \"" + itemToMove + "\" to position "+ destinationIndex + ".";
     }
 
-    public void removeItem(int index){
+    public String removeItem(int index){
+        String itemToRemove = this.items.get(index);
         this.items.remove(index);
+        return "Removed item \"" + itemToRemove + "\".";
     }
 
     public String itemString(){
