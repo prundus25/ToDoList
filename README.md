@@ -1,3 +1,4 @@
 ## ABOUT
 
-First CRUD project - List Manager.
+
+First CRUD project - List Manager. No persistence, no GUI
