@@ -1,3 +1,5 @@
+package listprogram;
+
 import java.util.Scanner;
 public abstract class MainMenu {
     static Scanner input = new Scanner(System.in);
@@ -17,12 +19,11 @@ public abstract class MainMenu {
     public static String addCommand(ListManager manager){
         System.out.print("Enter list name: ");
         elementName = input.nextLine();
-        System.out.println(manager.createList(elementName));
         return manager.createList(elementName);
     }
 
     public static int consultCommand(){
-        System.out.println(ENTERNUMBER);
+        System.out.print(ENTERNUMBER);
         index = input.nextInt() - OFFSET;
         return index;
     }
@@ -36,15 +37,15 @@ public abstract class MainMenu {
     }
 
     public static String removeCommand(ListManager manager){
-        System.out.println(ENTERNUMBER);
+        System.out.print(ENTERNUMBER);
         index = input.nextInt() - OFFSET;
         return manager.removeList(index);
     }
     
     public static String moveCommand(ListManager manager){
-        System.out.println(ENTERNUMBER);
+        System.out.print(ENTERNUMBER);
         index = input.nextInt() - OFFSET;
-        System.out.println("Enter the destination position for the list: ");
+        System.out.print("Enter the destination position for the list: ");
         destinationIndex = input.nextInt() - OFFSET;
         return manager.moveList(index, destinationIndex);
     }

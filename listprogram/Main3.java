@@ -1,3 +1,5 @@
+package listprogram;
+
 import java.util.Scanner;
 public class Main3 {
     public static void main(String[] args){        
@@ -5,26 +7,28 @@ public class Main3 {
         ListManager manager = new ListManager();
         int option;
         int option2;
-        final String SEPARATOR = "===============================";
         final String SEPARATOR2 = "*******************************";
         int listIndex;
-        int index;
 
-        while (true) { 
+        while (true) {
             System.out.println(MainMenu.mainMessage(manager));
             option = input.nextInt();
-            if (option == 0) break;
+            if (option == 0) {System.out.println("Exiting...");break;}
             else if (option == 2){
                 listIndex = MainMenu.consultCommand();
                 while (true){
                     System.out.println(ListMenu.mainMessage(manager, listIndex));
                     option2 = input.nextInt();
+                    System.out.println(SEPARATOR2);
                     if (option2 == 0) break;
                     else System.out.println(Maps.listMenu(manager, option2, listIndex));
+                    System.out.println(SEPARATOR2+"\n\n\n");
                 }
             }else{
+                System.out.println(SEPARATOR2);
                 System.out.println(Maps.mainMenu(manager, option));
-            } 
+                System.out.println(SEPARATOR2+"\n\n\n");
+            }
         }
-    } 
+    }
 }

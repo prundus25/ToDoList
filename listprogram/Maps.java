@@ -1,4 +1,7 @@
+package listprogram;
+
 public abstract class Maps {
+
   public static String mainMenu(ListManager manager, int option){
     return switch (option) {
       case 1 -> MainMenu.addCommand(manager);

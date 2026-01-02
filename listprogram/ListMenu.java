@@ -1,3 +1,5 @@
+package listprogram;
+
 import java.util.Scanner;
 public abstract class ListMenu {
     static Scanner input = new Scanner(System.in);
@@ -20,24 +22,24 @@ public abstract class ListMenu {
     }
 
     public static String renameCommand(ListManager manager, int listIndex){
-        System.out.println(ENTERNUMBER);
+        System.out.print(ENTERNUMBER);
         itemIndex = input.nextInt() - OFFSET ;
         input.skip("\n");
-        System.out.println("Enter a new name: ");
+        System.out.print("Enter a new name: ");
         elementNewName = input.nextLine();
         return manager.lists.get(listIndex).renameItem(itemIndex, elementNewName);
     }
 
     public static String removeCommand(ListManager manager, int listIndex){
-        System.out.println(ENTERNUMBER);
+        System.out.print(ENTERNUMBER);
         itemIndex = input.nextInt() - OFFSET ;
         return manager.lists.get(listIndex).removeItem(itemIndex);
     }
     
     public static String moveCommand(ListManager manager, int listIndex){
-        System.out.println(ENTERNUMBER);
+        System.out.print(ENTERNUMBER);
         itemIndex = input.nextInt() - OFFSET ;
-        System.out.println("Enter the destination position for the item: ");
+        System.out.print("Enter the destination position for the item: ");
         int destinationIndex = input.nextInt() - OFFSET ;
         return manager.lists.get(listIndex).moveItem(itemIndex, destinationIndex);
     }
